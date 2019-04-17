@@ -73,9 +73,14 @@ describe 'ActiveRecord Obstacle Course' do
     # ------------------ Using ActiveRecord ----------------------
     # Solution goes here
     # Your solution should not contain the ID of the order anywhere
+
     # order_id = Order.order(amount: :asc).first.id
-    smallest_amount = Order.minimum(:amount)
-    order_id = Order.where(amount: smallest_amount).last.id
+
+    # smallest_amount = Order.minimum(:amount)
+    # order_id = Order.where(amount: smallest_amount).last.id
+
+    order_id = Order.order(:amount).first.id
+
     # binding.pry
     # ------------------------------------------------------------
 
@@ -487,9 +492,11 @@ describe 'ActiveRecord Obstacle Course' do
     # -----------------------------------------------------------
 
     # ------------------ Using ActiveRecord ---------------------
-    # binding.pry
-    users = User.where.not(id: @user_2)
-    total_sales = Order.where(user_id: users).sum(:amount)
+
+    # users = User.where.not(id: @user_2)
+    # total_sales = Order.where(user_id: users).sum(:amount)
+
+    total_sales = Order.where.not(user_id: @user_2).sum(:amount)
     # -----------------------------------------------------------
 
     # Expectation
